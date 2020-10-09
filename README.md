@@ -8,4 +8,4 @@
 Copy the code in `initial.sql` to query console and run it
 
 ## Close database
-`docker-compose down`
+`docker-compose -f docker-compose.dev.yml down`
