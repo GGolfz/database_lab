@@ -1,0 +1,14 @@
+version: "3"
+services:
+  csc_database:
+    image: "postgres:12"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=213456
+      - POSTGRES_DB=csc_db
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+volumes:
+  database-data: 
