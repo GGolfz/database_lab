@@ -88,3 +88,21 @@ WHERE (WORKDEPT, SALARY) IN
                             (SELECT WORKDEPT, MAX(SALARY)
                              FROM EMPLOYEE
                              GROUP BY WORKDEPT)));
+
+CREATE VIEW minOfMaxSalary (departmentName, minOfMaxSalaryAmongDept, firstName, lastName)
+AS
+(
+    SELECT FIRSTNME, LASTNAME, WORKDEPT, SALARY
+    FROM EMPLOYEE
+    WHERE (WORKDEPT, SALARY) IN
+          (SELECT WORKDEPT, MAX(SALARY)
+           FROM EMPLOYEE
+           GROUP BY WORKDEPT)
+      AND SALARY = (SELECT min(SALARY)
+                    FROM (SELECT SALARY
+                          FROM EMPLOYEE
+                          WHERE (WORKDEPT, SALARY) IN
+                                (SELECT WORKDEPT, MAX(SALARY)
+                                 FROM EMPLOYEE
+                                 GROUP BY WORKDEPT)))
+);
